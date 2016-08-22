@@ -63,7 +63,7 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 |react-redux|Redux library for connecting React components to Redux |
 |react-router|React library for routing |
 |redux|Library for unidirectional data flows |
-|redux-thunk|Middleware for redux that allows actions to be declared as functions |
+|redux-saga Middleware for redux to make side effects easier
 |babel-cli|Babel Command line interface |
 |babel-core|Babel Core for transpiling the new JavaScript to old |
 |babel-loader|Adds Babel support to Webpack |
@@ -141,12 +141,12 @@ Don't want to use Redux? See the next question for some steps on removing Redux.
 Nope. Redux is useful for applications with more complex data flows. If your app is simple, Redux is overkill. Remove Redux like this:
 
  1. Run `npm run remove-demo`
- 2. Uninstall Redux related packages: `npm uninstall redux react-redux redux-thunk`
+ 2. Uninstall Redux related packages: `npm uninstall redux react-redux redux-saga`
  3. Create a new empty component in /components.
  4. Call render on the new top level component you created in step 3 in src/index.js.
 
 ### How do I remove React Router?
- 1. Uninstall React Router and routing related packages: `npm uninstall --save react-router`
+ 1. Uninstall React Router and routing related packages: `npm uninstall --save react-router connect-history-api-fallback`
  2. Delete the following files: `src/routes.js`
  3. Remove `import { Link, IndexLink } from 'react-router';` from top of `src/components/App.js`, add a reference to `src/components/FuelSavingsForm.js`, and replace body of (implicit) render with this: `<FuelSavingsPage />`.
 

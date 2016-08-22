@@ -1,0 +1,28 @@
+.placeholder-form {
+  input[type=submit] {
+    margin-top: 30px;
+    width: 100%;
+  }
+}
+
+%placeholder-error {
+  @include text(12px);
+  color: $brand-danger;
+}
+
+.placeholder-auth-error {
+  @extend %placeholder-error;
+  margin-top: 10px;
+}
+
+// Extend theme class for Razor/MVC implementation.
+.nwt-form-field {
+  .input-validation-error {
+    border: 1px solid $brand-danger;
+  }
+
+  .field-validation-error {
+    @extend %placeholder-error;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,23 @@
+%placeholder-title {
+  @include heading();
+  margin-top: 20px;
+
+  @include breakpoint($tablet) {
+    margin-top: 50px;
+  }
+}
+
+.placeholder-title {
+  @extend %placeholder-title;
+  &.placeholder-title-login {
+    margin-bottom: 0;
+  }
+}
+.placeholder-password-reset-title {
+  @extend %placeholder-title;
+  margin-bottom: 10px;
+}
+.placeholder-list-title {
+  @include font-size(12px);
+  font-weight: normal;
+}

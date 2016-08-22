@@ -1,17 +1,17 @@
 {
-  "name": "react-slingshot",
-  "version": "5.0.0",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "react-slingshot-saga",
+  "version": "1.0.0",
+  "description": "React starter kit with Redux and Saga",
   "engines": {
-    "npm": ">=3"
+    "npm": ">=5"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
     "setup": "node tools/setup/setupMessage.js && npm install && node tools/setup/setup.js",
-    "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist",
     "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start:dashboard": "cross-env WEBPACK_DASHBOARD=true npm start",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -19,16 +19,17 @@
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
-    "build": "babel-node tools/build.js && npm run open:dist",
+    "build": "babel-node tools/build.js",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:cover": "babel-node node_modules/isparta/bin/isparta cover --root src --report html node_modules/mocha/bin/_mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
-    "test:cover:travis": "babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "open:cover": "npm run test:cover && open coverage/index.html"
   },
-  "author": "Cory House",
+  "author": "Neptune",
   "license": "MIT",
   "dependencies": {
+    "babel-polyfill": "6.13.0",
+    "keymirror": "0.1.1",
     "object-assign": "4.1.0",
     "react": "15.3.0",
     "react-dom": "15.3.0",
@@ -36,7 +37,7 @@
     "react-router": "2.6.1",
     "react-router-redux": "4.0.5",
     "redux": "3.5.2",
-    "redux-thunk": "2.1.0"
+    "redux-saga": "0.11.0"
   },
   "devDependencies": {
     "autoprefixer": "6.4.0",
@@ -69,12 +70,13 @@
     "html-webpack-plugin": "2.22.0",
     "isparta": "4.0.0",
     "mocha": "3.0.1",
-    "mockdate": "1.0.4",
+    "neptune-web-theme": "1.0.68",
     "node-sass": "3.8.0",
     "npm-run-all": "2.3.0",
     "open": "0.0.5",
     "postcss-loader": "0.9.1",
     "prompt": "1.0.0",
+    "proxyquire": "1.7.10",
     "react-addons-test-utils": "15.3.0",
     "redux-immutable-state-invariant": "1.2.3",
     "replace": "0.3.0",
@@ -85,6 +87,7 @@
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
+    "webpack-dashboard": "0.0.1",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2",
     "webpack-md5-hash": "0.0.5"
@@ -106,6 +109,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/react-slingshot"
+    "url": "https://github.com/DVLP/react-slingshot.git"
   }
 }

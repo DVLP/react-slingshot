@@ -1,0 +1,113 @@
+html, body {
+  height: 100%;
+}
+body {
+  @include breakpoint($tablet) {
+    background: $brand-primary-heavy no-repeat;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-size: 91% auto;
+    background-position-x: -19.5vw;
+  }
+  @include breakpoint($desktop) {
+    background-position-x: 0;
+    background-size: 58.4% auto;
+  }
+  @include breakpoint($wide) {
+    background-size: 58.4% auto;
+  }
+}
+
+#placeholder-app {
+  background: $brand-secondary-light;
+  min-height: 100%;
+
+  @include gutters();
+  @include breakpoint($tablet) {
+    @include span(6);
+    margin-left: auto;
+    float: none;
+  }
+  @include breakpoint($desktop) {
+    @include span(5);
+    margin-left: auto;
+    float: none;
+  }
+
+  header, article, footer {
+    padding-left: 15px;
+    padding-right: 15px;
+    @include breakpoint($tablet) {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    @include breakpoint($desktop) {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+}
+
+.placeholder-header {
+  text-align: center;
+  padding-top: 18px;
+
+  @include breakpoint($tablet) {
+    padding-top: 50px;
+  }
+  @include breakpoint($desktop) {
+    padding-top: 34px;
+  }
+
+  .placeholder-logo {
+    @include breakpoint($tablet) {
+      float: right;
+      margin-right: -6px;
+    }
+    img {
+      width: 83px;
+      @include breakpoint($tablet) {
+        width: 106px;
+      }
+    }
+
+  }
+  .placeholder-logo-product {
+    margin-left: 14px;
+    img {
+      vertical-align: top;
+      margin-top: 7px;
+      @include breakpoint($tablet) {
+        width: 104px;
+        margin-top: 10px;
+      }
+    }
+    @include breakpoint($tablet) {
+      float: right;
+      clear: right;
+      margin-right: -1px;
+      margin-bottom: 24px;
+    }
+  }
+
+  hr {
+    @include hr();
+    background-color: $grey-light;
+    margin-top: 16px;
+    @include breakpoint($tablet) {
+      clear: right;
+      margin-bottom: 0;
+    }
+  }
+
+  @include breakpoint($tablet) {
+    text-align: right;
+    a {
+      display: block;
+    }
+  }
+}
+
+.placeholder-lost {
+  width: 100%;
+}

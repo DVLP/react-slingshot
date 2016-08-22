@@ -5,6 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -12,9 +13,6 @@ const GLOBALS = {
 };
 
 export default {
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
   debug: true,
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
@@ -22,8 +20,9 @@ export default {
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: `${__dirname}/dist`,
-    publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    publicPath: '',
+    filename: 'bundle.js'
+    //filename: '[name].[chunkhash].js'
   },
   plugins: [
     // Hash the files using MD5 so that their names change when the content changes.
@@ -36,7 +35,8 @@ export default {
     new webpack.DefinePlugin(GLOBALS),
 
     // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    //new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin('bundle.css'),
 
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
@@ -67,7 +67,7 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'},
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url?name=[name].[ext]'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000&mimetype=application/font-woff&name=[name].[ext]"},
       {test: /\.ttf(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream&name=[name].[ext]'},
@@ -75,6 +75,11 @@ export default {
       {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]'},
       {test: /\.ico$/, loader: 'file?name=[name].[ext]'},
       {test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap')}
+    ]
+  },
+  sassLoader: {
+    includePaths: [
+      path.resolve(__dirname, 'node_modules')
     ]
   },
   postcss: ()=> [autoprefixer]

@@ -1,3 +1,12 @@
+require('babel-polyfill');
+// TODO: Make mocha-sinon work with the coverage tool
+//require('mocha-sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+
+global.should = chai.should();
+chai.use(sinonChai);
+
 // Tests are placed alongside files under test.
 // This file does the following:
 // 1. Sets the environment to 'test' so that

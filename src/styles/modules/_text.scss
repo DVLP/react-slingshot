@@ -1,0 +1,19 @@
+.placeholder-container {
+  @include font-size(12px);
+}
+.placeholder-subheader {
+  @include text(12px);
+  line-height: 18px;
+  margin: 10px 0 50px 0;
+}
+.placeholder-text-big {
+  @include text();
+  line-height: 28px;
+  margin-top: 28px;
+}
+hr.placeholder-hr-section {
+  @include hr();
+  background-color: $grey-light;
+  margin-top: 24px;
+  margin-bottom: 33px;
+}

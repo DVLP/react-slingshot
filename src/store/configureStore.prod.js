@@ -1,18 +1,17 @@
-import {createStore, compose, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+// This file merely configures the store for hot reloading.
+// This boilerplate file is likely to be the same for each project that uses Redux.
+// With Redux, the actual stores are in /reducers.
+
+import {applyMiddleware, createStore} from 'redux';
+import createSagaMiddleware, { END } from 'redux-saga';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
-  const middewares = [
-    // Add other middleware on this line...
+  const sagaMiddleware = createSagaMiddleware();
 
-    // thunk middleware can also accept an extra argument to be passed to each thunk action
-    // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunkMiddleware,
-  ];
+  const store = applyMiddleware(sagaMiddleware)(createStore)(rootReducer, initialState);
 
-  return createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middewares)
-    )
-  );
+  store.runSaga = sagaMiddleware.run;
+  store.close = () => store.dispatch(END);
+  return store;
 }

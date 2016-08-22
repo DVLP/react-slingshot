@@ -9,9 +9,16 @@ import historyApiFallback from 'connect-history-api-fallback';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import Dashboard from 'webpack-dashboard';
+import DashboardPlugin from 'webpack-dashboard/plugin';
 import config from '../webpack.config.dev';
 
 const bundler = webpack(config);
+
+// experimental dashboard view for webpack, run with "npm run start:dashboard"
+if(process.env.WEBPACK_DASHBOARD) {
+  bundler.apply(new DashboardPlugin(new Dashboard().setData));
+}
 
 // Run Browsersync and use middleware for Hot Module Replacement
 browserSync({
@@ -31,7 +38,7 @@ browserSync({
 
         // These settings suppress noisy webpack output so only errors are displayed to the console.
         noInfo: false,
-        quiet: false,
+        quiet: !!process.env.WEBPACK_DASHBOARD,
         stats: {
           assets: false,
           colors: true,

@@ -1,0 +1,17 @@
+// global neptune theme setting overrides
+// e.g. $font-folder: 'fonts';
+// ~ - is to point to the node modules directory
+$font-folder: '~neptune-web-theme/src/fonts';
+
+// global neptune theme framework
+@import "neptune-web-theme/src/scss/framework";
+
+// global neptune theme modules - optional generated classes
+@import "neptune-web-theme/src/scss/modules/all";
+
+// local project theme
+@import "libs/all";
+@import "config/all";
+@import "functions/all";
+@import "mixins/all";
+@import "modules/all";
